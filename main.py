@@ -7,6 +7,7 @@ from DBHandler import DATABASE
 from senbilisim_python import Ui_AnaMenu
 from alim_python import Ui_AlimTable
 from satis_python import Ui_satisTable
+from aksesuar_python import Ui_aksesuar
 
 #Database Object
 db_obj = DATABASE()
@@ -19,6 +20,7 @@ class mainWindow(QMainWindow):
         self.dialogs = list()
         self.ui.pushButton.clicked.connect(self.pushButtonClicked)
         self.ui.pushButton_2.clicked.connect(self.pushButton2Clicked)
+        self.ui.pushButton_3.clicked.connect(self.pushButton3Clicked)
     
     def pushButtonClicked(self):
         dialog = alimWindow()
@@ -28,6 +30,12 @@ class mainWindow(QMainWindow):
     
     def pushButton2Clicked(self):
         dialog = satisWindow()
+        self.dialogs.append(dialog)
+        dialog.show()
+        self.hide()
+    
+    def pushButton3Clicked(self):
+        dialog = aksesuarWindow()
         self.dialogs.append(dialog)
         dialog.show()
         self.hide()
@@ -108,6 +116,30 @@ class satisWindow(QMainWindow):
         db_obj.addSatisTable(satis_obj)
         QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
         self.AnamenuButtonClicked()
+
+class aksesuarWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_aksesuar()
+        self.ui.setupUi(self)
+        self.dialogs = list()
+        self.ui.btn_anamenu.clicked.connect(self.AnamenuButtonClicked)
+        self.ui.btn_kaydet.clicked.connect(self.KaydetButtonClicked)
+
+    def AnamenuButtonClicked(self):
+        dialog = mainWindow()
+        self.dialogs.append(dialog)
+        dialog.show()
+        self.hide()
+
+    def KaydetButtonClicked(self):
+        from Aksesuar import Aksesuar
+        AksesuarAdi = self.ui.txt_aksesuar.text()
+        AksesuarFiyati = int(self.ui.txt_fiyat.text())
+
+        aksesuar_obj = Aksesuar(AksesuarAdi,AksesuarFiyati)
+        db_obj.addAksesuar(aksesuar_obj)
+        QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
 
 
 if __name__ == '__main__':

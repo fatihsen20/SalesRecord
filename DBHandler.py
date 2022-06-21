@@ -34,6 +34,12 @@ class DATABASE():
         self.cursor.execute("INSERT INTO tbl_Satis (Urun_Id,Urun,IMEI,Tarih,Satis_Fiyati) VALUES (?,?,?,?,?)",
         satisobj.Urun_Id,satisobj.Urun,satisobj.Imei,satisobj.Tarih,satisobj.Fiyat)
         self.conn.commit()
+    
+    def addAksesuar(self,aksesuarobj):
+        print(aksesuarobj.__str__())
+        self.cursor.execute("INSERT INTO tbl_Aksesuar (Ad,AlisFiyati) VALUES (?,?)",
+        aksesuarobj.Ad,aksesuarobj.Fiyat)
+        self.conn.commit()
 
 # db = DATABASE()
 # print(db.getIdAlimTable())
