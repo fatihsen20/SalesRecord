@@ -155,14 +155,38 @@ class aksesuarSatisWindow(QMainWindow):
         self.ui = Ui_AksesuarSatis()
         self.ui.setupUi(self)
         self.dialogs = list()
+
+        #Add elements combobox
+        self.addComboBox()
+
         self.ui.btn_anamenu.clicked.connect(self.AnamenuButtonClicked)
-        # self.ui.btn_Kaydet.clicked.connect(self.KaydetButtonClicked)
+        self.ui.btn_Kaydet.clicked.connect(self.KaydetButtonClicked)
 
     def AnamenuButtonClicked(self):
         dialog = mainWindow()
         self.dialogs.append(dialog)
         dialog.show()
         self.hide()
+
+    def KaydetButtonClicked(self):
+        from AksesuarSatis import AksesuarSatis
+        fiyat = int(self.ui.txt_Fiyat.text())
+        tarih = self.ui.txt_Tarih.text()
+        ad = self.ui.comboBox.currentText()
+        id = db_obj.getAksesuarId(ad)
+
+        aksesuarObj = AksesuarSatis(id,ad,tarih,fiyat)
+        db_obj.addAksesuarSatisTable(aksesuarObj)
+        QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
+        self.AnamenuButtonClicked()
+
+    
+    def addComboBox(self):
+        comboBox = self.ui.comboBox
+        items = db_obj.getAksesuarName()
+        for itm in items:
+            comboBox.addItem(str(itm))
+    
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

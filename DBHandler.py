@@ -40,6 +40,26 @@ class DATABASE():
         self.cursor.execute("INSERT INTO tbl_Aksesuar (Ad,AlisFiyati) VALUES (?,?)",
         aksesuarobj.Ad,aksesuarobj.Fiyat)
         self.conn.commit()
+    
+    def getAksesuarName(self):
+        my_list = []
+        self.cursor.execute("SELECT Ad from tbl_Aksesuar")
+        for row in self.cursor.fetchall():
+            my_list.append(row[0])
+        return my_list
+    
+    def getAksesuarId(self,name):
+        self.cursor.execute("SELECT Id from tbl_Aksesuar WHERE Ad = ?", name)
+        row = self.cursor.fetchone()
+        return row[0]
+    
+    def addAksesuarSatisTable(self,aksesuarobj):
+        print(aksesuarobj.__str__())
+        self.cursor.execute("INSERT INTO tbl_AksesuarSatis (Aksesuar_Id,Aksesuar_Adi,Tarih,Aksesuar_Satis) VALUES (?,?,?,?)",
+        aksesuarobj.Id,aksesuarobj.Ad,aksesuarobj.Tarih,aksesuarobj.Fiyat)
+        self.conn.commit()
+        
+
 
 # db = DATABASE()
-# print(db.getIdAlimTable())
+# print(db.getAksesuarId("ttec Ios kablo"))
