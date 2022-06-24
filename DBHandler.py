@@ -58,8 +58,24 @@ class DATABASE():
         self.cursor.execute("INSERT INTO tbl_AksesuarSatis (Aksesuar_Id,Aksesuar_Adi,Tarih,Aksesuar_Satis) VALUES (?,?,?,?)",
         aksesuarobj.Id,aksesuarobj.Ad,aksesuarobj.Tarih,aksesuarobj.Fiyat)
         self.conn.commit()
-        
+    
+    def addTeknikServisTable(self,teknikServisobj):
+        print(teknikServisobj.__str__())
+        self.cursor.execute("INSERT INTO tbl_TeknikServis (Tarih,Islem,Tutar,Maliyet) VALUES (?,?,?,?)",
+        teknikServisobj.Tarih,teknikServisobj.Islem,teknikServisobj.Tutar,teknikServisobj.Maliyet)
+        self.conn.commit()  
+
+    def addGiderTable(self,giderobj):
+        print(giderobj.__str__())
+        self.cursor.execute("INSERT INTO tbl_Gider (Tarih,GiderAdi,GiderMiktari) VALUES (?,?,?)",
+        giderobj.Tarih,giderobj.Ad,giderobj.Miktar)
+        self.conn.commit()
+    
+    def getFulldataAlimTable(self):
+        self.cursor.execute("SELECT * FROM tbl_Alim")
+        rows = self.cursor.fetchall()
+        return rows
 
 
 # db = DATABASE()
-# print(db.getAksesuarId("ttec Ios kablo"))
+# print(db.getFulldataAlimTable())

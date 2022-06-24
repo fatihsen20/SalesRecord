@@ -76,7 +76,7 @@ class Ui_satisTable(object):
         self.txt_Imei.setGeometry(QtCore.QRect(130, 160, 321, 31))
         self.txt_Imei.setObjectName("txt_Imei")
         self.txt_Imei.setReadOnly(True)
-        self.txt_SatisTarihi = QtWidgets.QLineEdit(satisTable)
+        self.txt_SatisTarihi = QtWidgets.QDateEdit(satisTable)
         self.txt_SatisTarihi.setGeometry(QtCore.QRect(130, 210, 321, 31))
         self.txt_SatisTarihi.setObjectName("txt_SatisTarihi")
         self.txt_SatisFiyati = QtWidgets.QLineEdit(satisTable)

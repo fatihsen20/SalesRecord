@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>showAlimTable</class>
+ <widget class="QDialog" name="showAlimTable">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>854</width>
+    <height>398</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Alım Tablosu</string>
+  </property>
+  <widget class="QPushButton" name="btn_anamenu">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>360</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>AnaMenü</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tbl_alim">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>20</y>
+     <width>611</width>
+     <height>321</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txt_ara">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>30</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string/>
+   </property>
+   <property name="text">
+    <string>Ürün No</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_ara">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>70</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ara</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

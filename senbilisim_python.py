@@ -35,6 +35,9 @@ class Ui_AnaMenu(object):
         self.pushButton_6 = QtWidgets.QPushButton(AnaMenu)
         self.pushButton_6.setGeometry(QtCore.QRect(510, 300, 91, 31))
         self.pushButton_6.setObjectName("pushButton_6")
+        self.pushButton_7 = QtWidgets.QPushButton(AnaMenu)
+        self.pushButton_7.setGeometry(QtCore.QRect(510, 200, 91, 31))
+        self.pushButton_7.setObjectName("pushButton_7")
 
         self.retranslateUi(AnaMenu)
         QtCore.QMetaObject.connectSlotsByName(AnaMenu)
@@ -48,4 +51,5 @@ class Ui_AnaMenu(object):
         self.pushButton_4.setText(_translate("AnaMenu", "Aksesuar Satış"))
         self.pushButton_5.setText(_translate("AnaMenu", "Teknik Servis"))
         self.pushButton_6.setText(_translate("AnaMenu", "Gider"))
+        self.pushButton_7.setText(_translate("AnaMenu", "Alım Tablosu"))
 

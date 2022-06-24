@@ -54,7 +54,7 @@ class Ui_AksesuarSatis(object):
         self.comboBox.setEditable(True)
         self.comboBox.setInsertPolicy(QtWidgets.QComboBox.NoInsert)
         self.comboBox.completer().setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
-        self.txt_Tarih = QtWidgets.QLineEdit(AksesuarSatis)
+        self.txt_Tarih = QtWidgets.QDateEdit(AksesuarSatis)
         self.txt_Tarih.setGeometry(QtCore.QRect(150, 110, 251, 31))
         self.txt_Tarih.setObjectName("txt_Tarih")
         self.txt_Fiyat = QtWidgets.QLineEdit(AksesuarSatis)

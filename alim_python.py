@@ -72,7 +72,7 @@ class Ui_AlimTable(object):
         self.txt_Model = QtWidgets.QLineEdit(AlimTable)
         self.txt_Model.setGeometry(QtCore.QRect(130, 120, 301, 31))
         self.txt_Model.setObjectName("txt_Model")
-        self.txt_Tarih = QtWidgets.QLineEdit(AlimTable)
+        self.txt_Tarih = QtWidgets.QDateEdit(AlimTable)
         self.txt_Tarih.setGeometry(QtCore.QRect(130, 170, 301, 31))
         self.txt_Tarih.setObjectName("txt_Tarih")
         self.txt_Fiyat = QtWidgets.QLineEdit(AlimTable)
