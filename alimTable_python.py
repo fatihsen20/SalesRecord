@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'C:/Users/Numan/Desktop/SatisKayit/alimTable.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_showAlimTable(object):
@@ -19,7 +11,7 @@ class Ui_showAlimTable(object):
         self.tbl_alim.setGeometry(QtCore.QRect(30, 20, 630, 321))
         self.tbl_alim.setObjectName("tbl_alim")
         self.tbl_alim.setColumnCount(6)
-        self.tbl_alim.setHorizontalHeaderLabels(["Urun No","IMEI","Model","AlimTarihi","AlimFiyati","AlimYeri"])
+        self.tbl_alim.setHorizontalHeaderLabels(["Urun No","IMEI","Model","Alım Tarihi","Alım Fiyatı","Alım Yeri"])
         self.tbl_alim.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
         self.txt_ara = QtWidgets.QLineEdit(showAlimTable)
         self.txt_ara.setGeometry(QtCore.QRect(680, 30, 150, 30))

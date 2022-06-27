@@ -24,7 +24,7 @@ class DATABASE():
     
     def getIdAlimTable(self):
         my_list = []
-        self.cursor.execute("SELECT UrunId FROM tbl_Alim")
+        self.cursor.execute("SELECT UrunId FROM tbl_Alim WHERE UrunId NOT IN (SELECT Urun_Id FROM tbl_Satis)")
         for row in self.cursor.fetchall():
             my_list.append(row[0])
         return my_list
@@ -47,6 +47,11 @@ class DATABASE():
         for row in self.cursor.fetchall():
             my_list.append(row[0])
         return my_list
+    
+    def getAksesuarFiyat(self,Id):
+        self.cursor.execute("SELECT AlisFiyati FROM tbl_Aksesuar WHERE Id = ?",Id)
+        row = self.cursor.fetchone()
+        return row[0]
     
     def getAksesuarId(self,name):
         self.cursor.execute("SELECT Id from tbl_Aksesuar WHERE Ad = ?", name)
@@ -75,6 +80,22 @@ class DATABASE():
         self.cursor.execute("SELECT * FROM tbl_Alim")
         rows = self.cursor.fetchall()
         return rows
+    
+    def getFulldataSatisTable(self):
+        self.cursor.execute("SELECT * FROM tbl_Satis")
+        rows = self.cursor.fetchall()
+        return rows
+    
+    def getFulldataAksesuarTable(self):
+        self.cursor.execute("SELECT * FROM tbl_Aksesuar")
+        rows = self.cursor.fetchall()
+        return rows
+
+    def getFulldataAksesuarSatisTable(self):
+        self.cursor.execute("SELECT * FROM tbl_AksesuarSatis")
+        rows = self.cursor.fetchall()
+        return rows
+    
 
 
 # db = DATABASE()

@@ -12,6 +12,10 @@ from aksesuarSatis_python import Ui_AksesuarSatis
 from teknikServis_python import Ui_teknik_servis
 from gider_python import Ui_gider
 from alimTable_python import Ui_showAlimTable
+from satisTable_python import Ui_showSatisTable
+from kar_python import Ui_kar
+from aksesuarTable_python import Ui_showAksesuar
+from AksesuarSatisTable_python import Ui_aksesuarSatisTable
 
 #Database Object
 db_obj = DATABASE()
@@ -33,6 +37,10 @@ class mainWindow(QMainWindow):
         self.ui.pushButton_5.clicked.connect(self.pushButton5Clicked)
         self.ui.pushButton_6.clicked.connect(self.pushButton6Clicked)
         self.ui.pushButton_7.clicked.connect(self.pushButton7Clicked)
+        self.ui.pushButton_8.clicked.connect(self.pushButton8Clicked)
+        self.ui.pushButton_9.clicked.connect(self.pushButton9Clicked)
+        self.ui.pushButton_10.clicked.connect(self.pushButton10Clicked)
+        self.ui.pushButton_11.clicked.connect(self.pushButton11Clicked)
 
     def pushButtonClicked(self):
         dialog = alimWindow()
@@ -75,6 +83,30 @@ class mainWindow(QMainWindow):
         self.dialogs.append(dialog)
         dialog.show()
         self.hide()
+    
+    def pushButton8Clicked(self):
+        dialog = showSatisTableWindow()
+        self.dialogs.append(dialog)
+        dialog.show()
+        self.hide()
+    
+    def pushButton9Clicked(self):
+        dialog = karWindow()
+        self.dialogs.append(dialog)
+        dialog.show()
+        self.hide()
+    
+    def pushButton10Clicked(self):
+        dialog = showAksesuarTableWindow()
+        self.dialogs.append(dialog)
+        dialog.show()
+        self.hide()
+    
+    def pushButton11Clicked(self):
+        dialog = showAksesuarSatisTableWindow()
+        self.dialogs.append(dialog)
+        dialog.show()
+        self.hide()
 
 class alimWindow(QMainWindow):
     def __init__(self):
@@ -97,7 +129,7 @@ class alimWindow(QMainWindow):
         from Alim import Alim
         Imei = self.ui.txt_Imei.text()
         Model = self.ui.txt_Model.text()
-        AlimTarihi = self.ui.txt_Tarih.text()
+        AlimTarihi = self.ui.txt_Tarih.date().toString("yyyy-MM-dd")
         AlimFiyati = self.ui.txt_Fiyat.text()
         AlimYeri = self.ui.txt_Alimyeri.text()
 
@@ -149,7 +181,7 @@ class satisWindow(QMainWindow):
         UrunNo = int(self.ui.comboBox.currentText())
         Imei = self.ui.txt_Imei.text()
         Model = self.ui.txt_Model.text()
-        SatisTarihi = self.ui.txt_SatisTarihi.text()
+        SatisTarihi = self.ui.txt_SatisTarihi.date().toString("yyyy-MM-dd")
         SatisFiyati = int(self.ui.txt_SatisFiyati.text())
 
         satis_obj = Satis(UrunNo,Model,Imei,SatisTarihi,SatisFiyati)
@@ -205,7 +237,7 @@ class aksesuarSatisWindow(QMainWindow):
     def KaydetButtonClicked(self):
         from AksesuarSatis import AksesuarSatis
         fiyat = int(self.ui.txt_Fiyat.text())
-        tarih = self.ui.txt_Tarih.text()
+        tarih = self.ui.txt_Tarih.date().toString("yyyy-MM-dd")
         ad = self.ui.comboBox.currentText()
         id = db_obj.getAksesuarId(ad)
 
@@ -241,7 +273,7 @@ class teknikServisWindow(QMainWindow):
 
     def KaydetButtonClicked(self):
         from TeknikServis import TeknikServis
-        Tarih = self.ui.txt_tarih.text()
+        Tarih = self.ui.txt_tarih.date().toString("yyyy-MM-dd")
         Islem = self.ui.txt_islem.text()
         Tutar = int(self.ui.txt_tutar.text())
         Maliyet = int(self.ui.txt_maliyet.text())
@@ -271,7 +303,7 @@ class giderWindow(QMainWindow):
 
     def KaydetButtonClicked(self):
         from Gider import Gider
-        Tarih = self.ui.txt_tarih.text()
+        Tarih = self.ui.txt_tarih.date().toString("yyyy-MM-dd")
         GiderAdi = self.ui.txt_ad.text()
         Miktar = int(self.ui.txt_miktar.text())
         
@@ -319,7 +351,185 @@ class showAlimTableWindow(QMainWindow):
                 break
         else:
             QMessageBox.about(self,"Hata","Kayıt Bulunamadı!")
+
+class showSatisTableWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_showSatisTable()
+        self.ui.setupUi(self)
+        self.dialogs = list()
+        
+        self.ui.btn_anamenu.clicked.connect(self.AnamenuButtonClicked)
+        self.ui.btn_ara.clicked.connect(self.AraButtonClicked)
+
+        self.setTableData()
+
+    def AnamenuButtonClicked(self):
+        dialog = mainWindow()
+        self.dialogs.append(dialog)
+        dialog.show()
+        self.hide()
+
+    def setTableData(self):
+        items = db_obj.getFulldataSatisTable()
+        self.ui.tbl_satis.setRowCount(len(items))
+        j = 0
+        for itm in items:
+            alimInfo = db_obj.getElementAlimTable(itm[0])
+            self.ui.tbl_satis.setItem(j,0,QTableWidgetItem(str(itm[0])))
+            self.ui.tbl_satis.setItem(j,1,QTableWidgetItem(str(itm[2])))
+            self.ui.tbl_satis.setItem(j,2,QTableWidgetItem(str(itm[1])))
+            self.ui.tbl_satis.setItem(j,3,QTableWidgetItem(alimInfo[3]))
+            self.ui.tbl_satis.setItem(j,4,QTableWidgetItem(itm[3]))
+            self.ui.tbl_satis.setItem(j,5,QTableWidgetItem(str(alimInfo[4])))
+            self.ui.tbl_satis.setItem(j,6,QTableWidgetItem(str(itm[4])))
+            self.ui.tbl_satis.setItem(j,7,QTableWidgetItem(str(alimInfo[5])))
+            
+            j+=1
+
+    def AraButtonClicked(self):
+        Id = self.ui.txt_ara.text()
+        for row in range(self.ui.tbl_satis.rowCount()):
+            if self.ui.tbl_satis.item(row,0).text() == str(Id):
+                self.ui.tbl_satis.setCurrentCell(row,0)
+                break
+        else:
+            QMessageBox.about(self,"Hata","Kayıt Bulunamadı!")
+
+class karWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_kar()
+        self.ui.setupUi(self)
+        self.dialogs = list()
+        
+        self.ui.btn_anamenu.clicked.connect(self.AnamenuButtonClicked)
+        self.ui.cmb_ay.currentIndexChanged.connect(self.getElements)
+        self.ui.cmb_yil.currentIndexChanged.connect(self.getElements)
+
+    def AnamenuButtonClicked(self):
+        dialog = mainWindow()
+        self.dialogs.append(dialog)
+        dialog.show()
+        self.hide()
     
+    def calcSatisProfit(self,month,year):
+        satisTableWindow = showSatisTableWindow()
+        satisTable = satisTableWindow.ui.tbl_satis
+        profit = 0
+        for row in range(satisTable.rowCount()):
+            if satisTable.item(row,4).text()[6] == month and satisTable.item(row,4).text()[0:4] == year:
+                profit += int(satisTable.item(row,6).text()) - int(satisTable.item(row,5).text())
+        print(profit)
+        self.ui.txt_Satis.setText(str(profit))
+        self.ui.txt_Total.setText(str(int(self.ui.txt_Total.text())+int(self.ui.txt_Satis.text())))
+    
+    def calcAksesuaryProfit(self,month,year):
+        aksesuarTableWindow = showAksesuarSatisTableWindow()
+        aksesuarTable = aksesuarTableWindow.ui.tbl_AksesuarSatis
+        profit = 0
+        for row in range(aksesuarTable.rowCount()):
+            if aksesuarTable.item(row,2).text()[6] == month and aksesuarTable.item(row,2).text()[0:4] == year:
+                profit += int(aksesuarTable.item(row,4).text()) - int(aksesuarTable.item(row,3).text())
+        print(profit)
+        self.ui.txt_Aksesuar.setText(str(profit))
+        self.ui.txt_Total.setText(str(int(self.ui.txt_Total.text())+int(self.ui.txt_Aksesuar.text())))
+    
+    def getElements(self):
+        if self.ui.cmb_ay.currentText() !=None and self.ui.cmb_yil.currentText() !=None:
+            self.ui.txt_Total.setText("0")
+            self.calcSatisProfit(self.ui.cmb_ay.currentText(),self.ui.cmb_yil.currentText())
+            self.calcAksesuaryProfit(self.ui.cmb_ay.currentText(),self.ui.cmb_yil.currentText())
+            
+
+class showAksesuarTableWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_showAksesuar()
+        self.ui.setupUi(self)
+        self.dialogs = list()
+
+        self.setTableData()
+        
+        #Table column resize
+        header = self.ui.tbl_aksesuar.horizontalHeader()       
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+
+        self.ui.btn_anamenu.clicked.connect(self.AnamenuButtonClicked)
+        self.ui.btn_ara.clicked.connect(self.AraButtonClicked)
+
+    def AnamenuButtonClicked(self):
+        dialog = mainWindow()
+        self.dialogs.append(dialog)
+        dialog.show()
+        self.hide()
+    
+    def AraButtonClicked(self):
+        item = self.ui.txt_ara.text()
+        for row in range(self.ui.tbl_aksesuar.rowCount()):
+            if str(item) in self.ui.tbl_aksesuar.item(row,1).text():
+                self.ui.tbl_aksesuar.showRow(row)
+            else:
+                self.ui.tbl_aksesuar.hideRow(row)
+    
+    def setTableData(self):
+        items = db_obj.getFulldataAksesuarTable()
+        self.ui.tbl_aksesuar.setRowCount(len(items))
+        j = 0
+        for itm in items: 
+            self.ui.tbl_aksesuar.setItem(j,0,QTableWidgetItem(str(itm[0])))
+            self.ui.tbl_aksesuar.setItem(j,1,QTableWidgetItem(str(itm[1])))
+            self.ui.tbl_aksesuar.setItem(j,2,QTableWidgetItem(str(itm[2])))
+            j+=1
+
+class showAksesuarSatisTableWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_aksesuarSatisTable()
+        self.ui.setupUi(self)
+        self.dialogs = list()
+
+        self.setTableData()
+        
+        #Table column resize
+        header = self.ui.tbl_AksesuarSatis.horizontalHeader()       
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+
+        self.ui.btn_anamenu.clicked.connect(self.AnamenuButtonClicked)
+        self.ui.btn_ara.clicked.connect(self.AraButtonClicked)
+
+    def AnamenuButtonClicked(self):
+        dialog = mainWindow()
+        self.dialogs.append(dialog)
+        dialog.show()
+        self.hide()
+    
+    def AraButtonClicked(self):
+        item = self.ui.txt_ara.text()
+        for row in range(self.ui.tbl_AksesuarSatis.rowCount()):
+            if str(item) in self.ui.tbl_AksesuarSatis.item(row,1).text():
+                self.ui.tbl_AksesuarSatis.showRow(row)
+            else:
+                self.ui.tbl_AksesuarSatis.hideRow(row)
+    
+    def setTableData(self):
+        items = db_obj.getFulldataAksesuarSatisTable()
+        self.ui.tbl_AksesuarSatis.setRowCount(len(items))
+        j = 0
+        for itm in items: 
+            alis = db_obj.getAksesuarFiyat(itm[0])
+            self.ui.tbl_AksesuarSatis.setItem(j,0,QTableWidgetItem(str(itm[0])))
+            self.ui.tbl_AksesuarSatis.setItem(j,1,QTableWidgetItem(str(itm[1])))
+            self.ui.tbl_AksesuarSatis.setItem(j,2,QTableWidgetItem(str(itm[2])))
+            self.ui.tbl_AksesuarSatis.setItem(j,3,QTableWidgetItem(str(alis)))
+            self.ui.tbl_AksesuarSatis.setItem(j,4,QTableWidgetItem(str(itm[3])))
+            j+=1
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

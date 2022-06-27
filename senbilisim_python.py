@@ -1,13 +1,4 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'C:/Users/Numan/Desktop/Otomasyon/senbilisim.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-from alim_python import Ui_AlimTable
 import sys
 from PyQt5.QtGui     import *
 from PyQt5.QtCore    import *
@@ -38,6 +29,19 @@ class Ui_AnaMenu(object):
         self.pushButton_7 = QtWidgets.QPushButton(AnaMenu)
         self.pushButton_7.setGeometry(QtCore.QRect(510, 200, 91, 31))
         self.pushButton_7.setObjectName("pushButton_7")
+        self.pushButton_8 = QtWidgets.QPushButton(AnaMenu)
+        self.pushButton_8.setGeometry(QtCore.QRect(410, 200, 91, 31))
+        self.pushButton_8.setObjectName("pushButton_8")
+        self.pushButton_9 = QtWidgets.QPushButton(AnaMenu)
+        self.pushButton_9.setGeometry(QtCore.QRect(310, 200, 91, 31))
+        self.pushButton_9.setObjectName("pushButton_9")
+        self.pushButton_10 = QtWidgets.QPushButton(AnaMenu)
+        self.pushButton_10.setGeometry(QtCore.QRect(210, 200, 91, 31))
+        self.pushButton_10.setObjectName("pushButton_10")
+        self.pushButton_11 = QtWidgets.QPushButton(AnaMenu)
+        self.pushButton_11.setGeometry(QtCore.QRect(110, 200, 91, 31))
+        self.pushButton_11.setObjectName("pushButton_11")
+
 
         self.retranslateUi(AnaMenu)
         QtCore.QMetaObject.connectSlotsByName(AnaMenu)
@@ -52,4 +56,9 @@ class Ui_AnaMenu(object):
         self.pushButton_5.setText(_translate("AnaMenu", "Teknik Servis"))
         self.pushButton_6.setText(_translate("AnaMenu", "Gider"))
         self.pushButton_7.setText(_translate("AnaMenu", "Alım Tablosu"))
+        self.pushButton_8.setText(_translate("AnaMenu", "Satış Tablosu"))
+        self.pushButton_9.setText(_translate("AnaMenu", "Kar Hesapla"))
+        self.pushButton_10.setText(_translate("AnaMenu", "Aksesuar Tablosu"))
+        self.pushButton_11.setText(_translate("AnaMenu", "Aksesuar Satış Tablosu"))
+
 
