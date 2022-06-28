@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:/Users/Numan/Desktop/Otomasyon/alim.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from PyQt5.QtGui     import *
@@ -69,6 +63,7 @@ class Ui_AlimTable(object):
         self.txt_Imei = QtWidgets.QLineEdit(AlimTable)
         self.txt_Imei.setGeometry(QtCore.QRect(130, 70, 301, 31))
         self.txt_Imei.setObjectName("txt_Imei")
+        self.txt_Imei.setMaxLength(15)
         self.txt_Model = QtWidgets.QLineEdit(AlimTable)
         self.txt_Model.setGeometry(QtCore.QRect(130, 120, 301, 31))
         self.txt_Model.setObjectName("txt_Model")

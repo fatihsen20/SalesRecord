@@ -149,10 +149,17 @@ class alimWindow(QMainWindow):
         AlimFiyati = self.ui.txt_Fiyat.text()
         AlimYeri = self.ui.txt_Alimyeri.text()
 
-        alimobj = Alim(Imei,Model,AlimTarihi,int(AlimFiyati),AlimYeri)
-        db_obj.addAlimTable(alimobj)
-        QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
-        self.AnamenuButtonClicked()
+        if Imei == "" or Model == "" or AlimTarihi == "" or AlimFiyati == "" or AlimYeri == "":
+            QMessageBox.warning(self, "Hata", "Lütfen boş alan bırakmayınız.")
+        
+        elif len(Imei) != 15:
+            QMessageBox.warning(self, "Hata", "Imei 15 karakter olmalıdır.")
+        
+        else:
+            alimobj = Alim(Imei,Model,AlimTarihi,int(AlimFiyati),AlimYeri)
+            db_obj.addAlimTable(alimobj)
+            QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
+            self.AnamenuButtonClicked()
 
 class satisWindow(QMainWindow):
     def __init__(self):
@@ -198,12 +205,15 @@ class satisWindow(QMainWindow):
         Imei = self.ui.txt_Imei.text()
         Model = self.ui.txt_Model.text()
         SatisTarihi = self.ui.txt_SatisTarihi.date().toString("yyyy-MM-dd")
-        SatisFiyati = int(self.ui.txt_SatisFiyati.text())
+        SatisFiyati = self.ui.txt_SatisFiyati.text()
 
-        satis_obj = Satis(UrunNo,Model,Imei,SatisTarihi,SatisFiyati)
-        db_obj.addSatisTable(satis_obj)
-        QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
-        self.AnamenuButtonClicked()
+        if Imei == "" or Model == "" or SatisTarihi == "" or SatisFiyati == "":
+            QMessageBox.warning(self, "Hata", "Lütfen boş alan bırakmayınız.")
+        else:
+            satis_obj = Satis(UrunNo,Model,Imei,SatisTarihi,int(SatisFiyati))
+            db_obj.addSatisTable(satis_obj)
+            QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
+            self.AnamenuButtonClicked()
 
 class aksesuarWindow(QMainWindow):
     def __init__(self):
@@ -223,11 +233,14 @@ class aksesuarWindow(QMainWindow):
     def KaydetButtonClicked(self):
         from Model.Aksesuar import Aksesuar
         AksesuarAdi = self.ui.txt_aksesuar.text()
-        AksesuarFiyati = int(self.ui.txt_fiyat.text())
+        AksesuarFiyati = self.ui.txt_fiyat.text()
 
-        aksesuar_obj = Aksesuar(AksesuarAdi,AksesuarFiyati)
-        db_obj.addAksesuar(aksesuar_obj)
-        QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
+        if AksesuarAdi == "" or AksesuarFiyati == "":
+            QMessageBox.warning(self, "Hata", "Lütfen boş alan bırakmayınız.")
+        else:
+            aksesuar_obj = Aksesuar(AksesuarAdi,int(AksesuarFiyati))
+            db_obj.addAksesuar(aksesuar_obj)
+            QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
     
 class aksesuarSatisWindow(QMainWindow):
     def __init__(self):
@@ -252,15 +265,18 @@ class aksesuarSatisWindow(QMainWindow):
 
     def KaydetButtonClicked(self):
         from Model.AksesuarSatis import AksesuarSatis
-        fiyat = int(self.ui.txt_Fiyat.text())
+        fiyat = self.ui.txt_Fiyat.text()
         tarih = self.ui.txt_Tarih.date().toString("yyyy-MM-dd")
         ad = self.ui.comboBox.currentText()
-        id = db_obj.getAksesuarId(ad)
 
-        aksesuarObj = AksesuarSatis(id,ad,tarih,fiyat)
-        db_obj.addAksesuarSatisTable(aksesuarObj)
-        QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
-        self.AnamenuButtonClicked()
+        if fiyat == "" or tarih == "":
+            QMessageBox.warning(self, "Hata", "Lütfen boş alan bırakmayınız.")
+        else:
+            id = db_obj.getAksesuarId(ad)
+            aksesuarObj = AksesuarSatis(id,ad,tarih,int(fiyat))
+            db_obj.addAksesuarSatisTable(aksesuarObj)
+            QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
+            self.AnamenuButtonClicked()
 
     
     def addComboBox(self):
@@ -291,13 +307,16 @@ class teknikServisWindow(QMainWindow):
         from Model.TeknikServis import TeknikServis
         Tarih = self.ui.txt_tarih.date().toString("yyyy-MM-dd")
         Islem = self.ui.txt_islem.text()
-        Tutar = int(self.ui.txt_tutar.text())
-        Maliyet = int(self.ui.txt_maliyet.text())
-        
-        teknikServis_obj = TeknikServis(Tarih,Islem,Tutar,Maliyet)
-        db_obj.addTeknikServisTable(teknikServis_obj)
-        QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
-        self.AnamenuButtonClicked()
+        Tutar = self.ui.txt_tutar.text()
+        Maliyet = self.ui.txt_maliyet.text()
+
+        if Tarih == "" or Islem == "" or Tutar == "" or Maliyet == "":
+            QMessageBox.warning(self, "Hata", "Lütfen boş alan bırakmayınız.")
+        else:
+            teknikServis_obj = TeknikServis(Tarih,Islem,int(Tutar),int(Maliyet))
+            db_obj.addTeknikServisTable(teknikServis_obj)
+            QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
+            self.AnamenuButtonClicked()
 
 class giderWindow(QMainWindow):
     def __init__(self):
@@ -321,12 +340,15 @@ class giderWindow(QMainWindow):
         from Model.Gider import Gider
         Tarih = self.ui.txt_tarih.date().toString("yyyy-MM-dd")
         GiderAdi = self.ui.txt_ad.text()
-        Miktar = int(self.ui.txt_miktar.text())
-        
-        gider_obj = Gider(Tarih,GiderAdi,Miktar)
-        db_obj.addGiderTable(gider_obj)
-        QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
-        self.AnamenuButtonClicked()
+        Miktar = self.ui.txt_miktar.text()
+
+        if Tarih == "" or GiderAdi == "" or Miktar == "":
+            QMessageBox.warning(self, "Hata", "Lütfen boş alan bırakmayınız.")
+        else:
+            gider_obj = Gider(Tarih,GiderAdi,int(Miktar))
+            db_obj.addGiderTable(gider_obj)
+            QMessageBox.about(self,"Kayıt","Kayıt Başarıyla Eklendi!")
+            self.AnamenuButtonClicked()
 
 class showAlimTableWindow(QMainWindow):
     def __init__(self):
