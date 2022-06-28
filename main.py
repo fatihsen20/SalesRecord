@@ -4,20 +4,20 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Controller.DBHandler import DATABASE
-from View.py.senbilisim_python import Ui_AnaMenu
-from View.py.alim_python import Ui_AlimTable
-from View.py.satis_python import Ui_satisTable
-from View.py.aksesuar_python import Ui_aksesuar
-from View.py.aksesuarSatis_python import Ui_AksesuarSatis
-from View.py.teknikServis_python import Ui_teknik_servis
-from View.py.gider_python import Ui_gider
-from View.py.alimTable_python import Ui_showAlimTable
-from View.py.satisTable_python import Ui_showSatisTable
-from View.py.kar_python import Ui_kar
-from View.py.aksesuarTable_python import Ui_showAksesuar
+from View.py.Senbilisim_python import Ui_AnaMenu
+from View.py.Alim_python import Ui_AlimTable
+from View.py.Satis_python import Ui_satisTable
+from View.py.Aksesuar_python import Ui_aksesuar
+from View.py.AksesuarSatis_python import Ui_AksesuarSatis
+from View.py.TeknikServis_python import Ui_teknik_servis
+from View.py.Gider_python import Ui_gider
+from View.py.AlimTable_python import Ui_showAlimTable
+from View.py.SatisTable_python import Ui_showSatisTable
+from View.py.Kar_python import Ui_kar
+from View.py.AksesuarTable_python import Ui_showAksesuar
 from View.py.AksesuarSatisTable_python import Ui_aksesuarSatisTable
-from View.py.teknikServisTable_python import Ui_teknikServisTable
-from View.py.giderTable_python import Ui_giderTable
+from View.py.TeknikServisTable_python import Ui_teknikServisTable
+from View.py.GiderTable_python import Ui_giderTable
 
 #Database Object
 db_obj = DATABASE()
