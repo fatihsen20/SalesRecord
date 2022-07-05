@@ -40,5 +40,5 @@ class Ui_showSatisTable(object):
         showSatisTable.setWindowTitle(_translate("showSatisTable", "Satış Tablosu"))
         self.btn_anamenu.setText(_translate("showSatisTable", "AnaMenü"))
         self.btn_ara.setText(_translate("showSatisTable", "Ara"))
-        self.txt_ara.setPlaceholderText(_translate("showAlimTable", "Imei Giriniz"))
+        self.txt_ara.setPlaceholderText(_translate("showAlimTable", "Imei veya Ürün No Giriniz"))
 

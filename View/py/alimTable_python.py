@@ -37,5 +37,5 @@ class Ui_showAlimTable(object):
         self.btn_anamenu.setText(_translate("showAlimTable", "AnaMenü"))
         self.txt_ara.setText(_translate("showAlimTable", ""))
         self.btn_ara.setText(_translate("showAlimTable", "Ara"))
-        self.txt_ara.setPlaceholderText(_translate("showAlimTable", "Imei Giriniz"))
+        self.txt_ara.setPlaceholderText(_translate("showAlimTable", "Imei veya Ürün Kodu Giriniz"))
 

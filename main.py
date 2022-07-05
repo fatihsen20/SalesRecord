@@ -387,6 +387,9 @@ class showAlimTableWindow(QMainWindow):
             if self.ui.tbl_alim.item(row,1).text() == str(Imei):
                 self.ui.tbl_alim.setCurrentCell(row,1)
                 break
+            elif self.ui.tbl_alim.item(row,0).text() == str(Imei):
+                self.ui.tbl_alim.setCurrentCell(row,0)
+                break
         else:
             QMessageBox.about(self,"Hata","Kayıt Bulunamadı!")
 
@@ -430,6 +433,9 @@ class showSatisTableWindow(QMainWindow):
         for row in range(self.ui.tbl_satis.rowCount()):
             if self.ui.tbl_satis.item(row,1).text() == str(Imei):
                 self.ui.tbl_satis.setCurrentCell(row,1)
+                break
+            elif self.ui.tbl_satis.item(row,0).text() == str(Imei):
+                self.ui.tbl_satis.setCurrentCell(row,0)
                 break
         else:
             QMessageBox.about(self,"Hata","Kayıt Bulunamadı!")
